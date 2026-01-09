@@ -70,6 +70,7 @@ The Processing Subsystem performs the following high-level functions:
 - Data pass to the Data-Transfer Subsystem
 - Execution of control logic
 The Processing Subsystem will be described in the Architecture with the next components:
+
 | Sensor ID | Description |
 |---------|-------------|
 |MCU- 01| Main processor for the Instrumentation System |
@@ -79,6 +80,8 @@ The Data-Storage Subsystem performs the following high-level functions:
 - Storage of processed and/or raw sensor data
 - Temporary buffering of data prior to external transmission
 - Retrieval of stored data under control of the Processing Subsystem
+The Data Storage Subsystem will be described in the Architecture with the next components:
+
 | Sensor ID | Description |
 |---------|-------------|
 |FLASH- 01| non-volatile memory for storing data during flight |
@@ -88,6 +91,8 @@ The Data-Transfer Subsystem manages the exchange of data between the Instrumenta
 The Data-Transfer Subsystem performs the following high-level functions:
 - Transfer of flight data to a computer.
 - Reception of external data, commands or code for the processing subsystem.
+The Data Transfer Subsystem will be described in the Architecture with the next components:
+
 | Sensor ID | Description |
 |---------|-------------|
 |USB- 01| USB for data tranfer |
@@ -134,4 +139,5 @@ flowchart LR
     PROC -->|Processed Data| TX
     TX-->|Commands and Code|PROC
     DATA-->|Stored Data|PROC
+
 ```
