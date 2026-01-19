@@ -32,9 +32,11 @@ The selected MCU is the ESP32-S3-DevKitC-1, this chip has great clock frequency 
 
 ## 4. BULK-01 selection
 The selected Bulkhead sensor for measuring the deformation is a Flex Sensor, BF350-3AA model, this model has a sensibility factor of 2 and a deformation limit of 2%, a resistance of 350 ohms and its dimmensions ares 5x4.5mm, this sensor is good for measuring small changes that the ones that will be experienced on the bulkhead.
+This sensor doesn't have an integrated ADC, as it is an analog sensor, as shown in the link on the part 14, all the analog to digital conversion should be donde in the MCU.
 
 ## 5. AIRFRAME-01 selection
 The selected sensor for measuring the deformation in the airframe is a Flex Sensor, BF350-3AA model, this model has a sensibility factor of 2 and a deformation limit of 2%, a resistance of 350 ohms and its dimmensions ares 5x4.5mm, this sensor is good for measuring small changes that the ones that will be experienced on the airframe.
+This sensor doesn't have an integrated ADC, as it is an analog sensor, as shown in the link on the part 14, all the analog to digital conversion should be donde in the MCU.
 
 ## 6. AIRFRAME-02 selection
 Based on Team 162 Project Technical Report IREC 2025, the accelerations expected with a range of 15% are the next ones:
@@ -135,18 +137,50 @@ Additionally, a 16GB Micro SD card will be used to store a file containing all t
 | FLASH- 01    | W25Q128         | SPI                    |          |
 | SD- 01       | MicroSD Adapter | SPI                    |          |
 
-## 14. PRELIMINARY PIN DISTRIBUTION
+## 14. Components needed
+| Component ID | Selected Sensor | Quantity | Links    | Unit Price |
+|--------------|-----------------|----------|----------|----------|
+| MCU-01       | ESP32           |        1 | https://www.mercadolibre.com.co/esp32-s3-devkitc-1-n16r8-240mhz-wifi-24ghz-bt-ble-5-mesh-ia/up/MCOU2415072850#polycard_client=search-desktop&search_layout=grid&position=2&type=product&tracking_id=ca0d567b-a2a6-4c04-b2f1-8e8458239032&wid=MCO1433642679&sid=search / https://www.electrosena.com/esp32-s3-devkitc-1-n16r8-240mhz-wifi-24ghz-bt?srsltid=AfmBOormrBJqhC2HQq-a3JGKDZVB748bG1iJ7COzusd_YJK0-UseGWigE98          | 39000         |
+| BULK- 01     | BF350-3AA       |        3 | https://www.didacticaselectronicas.com/shop/sensor-flex-modulo-sensor-de-flexion-13560#attr=         | 16420         |
+| AIRFRAME- 01 | BF350-3AA       |        4 | https://www.didacticaselectronicas.com/shop/sensor-flex-modulo-sensor-de-flexion-13560#attr=         | 16420         |
+| AIRFRAME- 02 | MPU6050         |        2 | https://electronilab.co/tienda/mpu6050-acelerometro-y-giroscopio-i2c/?srsltid=AfmBOoos5b-5oDYYjYWI4dc5Ce9IS2TpBlNzysd81v2O5NejvKPIZ8Fz / https://www.didacticaselectronicas.com/shop/gy-521-acelerometro-y-giroscopio-mpu-6050-3597?search=MPU6050&order=name+asc#attr=         | 13600       |
+| TEMP- 01     | ADT7410         |        4 | https://www.adafruit.com/product/4089?srsltid=AfmBOopTx8_F_sMqNDBvVKPHLc6pLuGQoYOHm5YqugRUhae2p8LorZwf   | 21956          |
+| MIC- 01      | MAX4466         |        1 | https://www.sigmaelectronica.net/producto/tarjeta-max4466/ / https://electronilab.co/tienda/modulo-microfono-electrect-con-preamplificador-max4466/?srsltid=AfmBOoqFRgg8PleYfhtgM5yKGgORRrDoCc9rKxrbrrb5RvXjFiq5PoA9         | 15900      |
+| ALT- 01      | MS5611          |        1 | https://www.didacticaselectronicas.com/shop/gy-63-modulo-sensor-presion-atmosferica-3594#attr=  /  https://yorobotics.co/producto/sensor-altura-presion-temperatura-barometrica-gy-63-ms5611/         | 28900      |
+| IMU- 01      | ICM-20649       |        1 | https://www.adafruit.com/product/4464?srsltid=AfmBOopLKi5BrY6BZZuWrmaGo0qtRc8N7KhczhfUXQSlWZKM1u__k7o8         | 55000         |
+| FLASH- 01    | W25Q128         |        1 | https://www.mactronica.com.co/memoria-flash-128mb-w25q128?srsltid=AfmBOorQbHocmottQ_JJlMXrq37RV3h-YZ7CIGkruXI81z6wScsyvdcJ  /  https://www.adafruit.com/product/5643         | 11000         |
+| SD- 01       | MicroSD Adapter |        1 | https://www.didacticaselectronicas.com/shop/tarusd-cn-02-modulo-tarjeta-microsd-compatible-arduino-tm-9424#attr=         | 2400         |
+
+## 15. PRELIMINARY PIN DISTRIBUTION
 | PIN    | Function |
 |--------|----------|
-| GPIO11 | SPI MOSI |
-| GPIO12 | SPI SCK  |
-| GPIO13 | SPI MISO |
 | GPIO4  | SD-01 CS |
 | GPIO5  | FLASH-01 CS |
 | GPIO6  | ALT-01 CS |
 | GPIO7  | IMU-01 CS |
 | GPIO8  | SDA |
 | GPIO9  | SCL |
-| GPIO16 | MIC-01 |
-| GPIO17   | AIRFRAME-01|
-| GPIO18   | BULK-01 |
+| GPIO11 | SPI MOSI |
+| GPIO12 | SPI SCK  |
+| GPIO13 | SPI MISO |
+| GPIO14 | MIC-01 |
+| GPIO15 | BULK-01 Sensor 1 |
+| GPIO16 | BULK-01 Sensor 2 |
+| GPIO17 | BULK-01 Sensor 3 |
+| GPIO35 | AIRFRAME-01 Sensor 1 |
+| GPIO36 | AIRFRAME-01 Sensor 2 |
+| GPIO37 | AIRFRAME-01 Sensor 3 |
+| GPIO38 | AIRFRAME-01 Sensor 4 |
+
+
+Note: - The AIRFRAME-02 sensor as there are two connected to the I2C bus, the AD0 pin of one of them should be connected to VCC, and the other one to GND, this is for having different I2C ID in the bus.
+- The TEMP-01 sensor as there are four connected to the I2C bus, the A0 and A1 should be connected to:
+
+| Sensor    | A0 | A1 |
+|-----------|----|----|
+|TEMP-01 Sensor 1|GND|GND|
+|TEMP-01 Sensor 2|VCC|GND|
+|TEMP-01 Sensor 3|GND|VCC|
+|TEMP-01 Sensor 4|VCC|VCC|
+
+this is for having different I2C ID in the bus.
