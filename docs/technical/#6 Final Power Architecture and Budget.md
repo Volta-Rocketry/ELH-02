@@ -20,6 +20,7 @@ This document defines the final power architecture for the TBD project. The info
 |  | | **Total** | 640,9925mA | 2042,19µA | 565mA |
 
 - **Total:** Rated Current Consumption + Possible Current Spikes
+
 $$
 TotalCurrentConsumption = 641mA + 565mA = 1206mA
 $$
@@ -27,15 +28,19 @@ $$
 ## 3. Battery Final Selection
 ### Primary Considerations
 - **Capacity (mAh)**
+
 $$
 FinalCapacity = I_T (mA) \cdot \ T (Hours)
 $$
+
 $$
 FinalCapacity = 1206mA \cdot \ 4h
 $$
+
 $$
 FinalCapacity = 4824mAh
 $$
+
 - **Voltage (V)**
 
     Voltage not too high but sufficient to facilitate regulation at 5V and 3.3V, preventing heat spikes.
