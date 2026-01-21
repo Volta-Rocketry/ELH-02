@@ -204,3 +204,56 @@ this is for having different I2C ID in the bus.
 
 this is for having different I2C ID in the bus.
 
+## 16. Strain Gauge Justification
+
+In a Wheatstone bridge the calulation of the output Voltage is calculated as:
+
+$$V_{out} = V_{exc} \left( \frac{R_2}{R_1 + R_2} - \frac{R_4}{R_3 + R_4} \right)$$
+
+So in this case, for calculating that in the initial condition the Voltage is 0 the equation with the resistance should give 0, according to that the equation is:
+
+$$V_{out} = V_{exc} \left( \frac{350}{350 + 330} - \frac{350}{350 + 330} \right) = 0$$
+
+With that we can be sure that the initial configuration for the Wheatstone bridge should be good.
+
+The equation for calculating the output voltage of the bridge is the next one: 
+$$V_{out} = - \frac{V_{exc}}{2} \cdot GF \cdot \varepsilon$$
+
+We need to calculate the maximum strain of the vehicle for the AIRFRAME-01 sensor, we do this using this equation:
+$$\varepsilon(x) = \frac{M(x) c}{EI}$$
+
+For calculations, the parameters of the Cesar rocket were used.
+Maximum bending moment and a 15% value for security reasons, we should have a bending moment of 263Nm, also having an external diameter of 174mm, having a Young's modulus of 610942Psi and finally I, that is the second moment of area, also referred to as the area moment of inertia, is a geometric property of a cross-section that quantifies its resistance to bending, its value is equal to 5.85x10^-6 m^4
+
+With taht for the airframe the calculation result is the next one
+
+$$\varepsilon \approx 930 \, \mu\varepsilon$$
+
+Assuming a voltage of 5V is used at the input of the strain gauge, the following is obtained
+
+$$V_{out} = \frac{V_{exc}}{2} \cdot GF \cdot \varepsilon$$
+
+$$V_{out} = \frac{5}{2} \cdot 2 \cdot 9.3 \times 10^{-4}$$
+
+$$V_{out} \approx 4.65 \, \text{mV}$$
+
+With a differential bridge output of 4.65 mV, the HX711 ADC operating at a gain of 128 converts the signal into approximately 1.95 million digital counts, corresponding to roughly 23% of the available input range. This operating point ensures high resolution while maintaining sufficient margin to avoid saturation under dynamic loading conditions.
+
+The fuselage section analyzed is manufactured from fiberglass reinforced polymer (GFRP). Due to its relatively low coefficient of thermal expansion and low thermal conductivity, the effect of aerodynamic heating during flight is reduced compared to metallic structures. For an estimated temperature increase of 20–30 °C, the induced thermal strain is on the order of 200–300 microstrain, which is significantly lower than the expected mechanical strain. First-order temperature effects on the strain gauges are further mitigated by the half-bridge configuration.
+
+For the bulkhead We need to calculate the maximum strain of the vehicle for the BULK-01 sensor, we do this using this equation:
+$$\varepsilon_{\text{max}} = \frac{3 p a^2}{8 E t^2}$$
+
+This equation is used for circular plates,  the bulkhead, solving the equation, given the measurements of Cesar bulkhead and the maximum recovery forces, the solution to the equation is as follows:
+
+$$\epsilon_{\max} = \frac{3 \cdot 3353}{5.50 \times 10^8}$$
+
+$$\boxed{\epsilon_{\max} \approx 1.83 \times 10^{-5}}$$
+
+$$\boxed{\epsilon_{\max} \approx 18 \mu\epsilon}$$
+
+For a maximum axial load of 3.35 kN uniformly distributed over the bulkhead area, the Aluminum 6061-T6 bulkhead exhibits a maximum surface strain of approximately 18 microstrain, remaining well within the elastic regime. This strain level is measurable using a resistive strain gauge configured in a Wheatstone bridge and interfaced with an HX711 24-bit analog-to-digital converter, which provides sufficient resolution to accurately capture microstrain-level signals under low-noise conditions.
+
+In this case, the strain gauge will be protected with Kevlar to withstand the thermal effects of the ejection charge, if a similar temperature is achieved in both gauges, the measurement would not be affected.
+
+
