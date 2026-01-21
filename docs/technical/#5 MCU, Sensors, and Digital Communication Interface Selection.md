@@ -31,12 +31,14 @@ The purpose of this document is to define the selected MCU, sensors, and digital
 The selected MCU is the ESP32-S3-DevKitC-1, this chip has great clock frequency and specifications for this flight, also it has been flight proven by different teams on the IREC competition.
 
 ## 4. BULK-01 selection
-The selected Bulkhead sensor for measuring the deformation is a Flex Sensor, BF350-3AA model, this model has a sensibility factor of 2 and a deformation limit of 2%, a resistance of 350 ohms and its dimmensions ares 5x4.5mm, this sensor is good for measuring small changes that the ones that will be experienced on the bulkhead.
-This sensor doesn't have an integrated ADC, as it is an analog sensor, as shown in the link on the part 14, all the analog to digital conversion should be donde in the MCU.
+The selected Bulkhead sensor for measuring the deformation is a BF350-3AA strain gauge, this model has a sensibility factor of 2 and a deformation limit of 2%, a resistance of 350 ohms and its dimmensions ares 5x4.5mm, this sensor is good for measuring small changes that the ones that will be experienced on the bulkhead.
+With this sensor we have to use 2 Strain gauges per location in the bulkhead, this means that if we have to measure in 3 different points on the bulkhead, we have to use 6 strain gauges, this gauges have to be placed one in the upper part of the bulkhead and the other one on the bottom, this is with the objective of measuring tension and compression, and having an accurate measurement using a Wheatstone bridge, using other 2 fixed resistors of 330 ohm.
+The ADC that will be used is the HX711, with an ADC of 24 bits.
 
 ## 5. AIRFRAME-01 selection
-The selected sensor for measuring the deformation in the airframe is a Flex Sensor, BF350-3AA model, this model has a sensibility factor of 2 and a deformation limit of 2%, a resistance of 350 ohms and its dimmensions ares 5x4.5mm, this sensor is good for measuring small changes that the ones that will be experienced on the airframe.
-This sensor doesn't have an integrated ADC, as it is an analog sensor, as shown in the link on the part 14, all the analog to digital conversion should be donde in the MCU.
+The selected Bulkhead sensor for measuring the deformation is a BF350-3AA strain gauge, this model has a sensibility factor of 2 and a deformation limit of 2%, a resistance of 350 ohms and its dimmensions ares 5x4.5mm, this sensor is good for measuring small changes that the ones that will be experienced on the airframe.
+With this sensor we have to use 2 Strain gauges per location in the airframe, this means that if we have to measure in 4 different points on the airframe, we have to use 8 strain gauges, this gauges have to be placed one on the inside and the other one on the outside, this is with the objective of measuring tension and compression, and having an accurate measurement using a Wheatstone bridge, using other 2 fixed resistors of 330 ohm.
+The ADC that will be used is the HX711, with an ADC of 24 bits.
 
 ## 6. AIRFRAME-02 selection
 Based on Team 162 Project Technical Report IREC 2025, the accelerations expected with a range of 15% are the next ones:
@@ -141,8 +143,9 @@ Additionally, a 16GB Micro SD card will be used to store a file containing all t
 | Component ID | Selected Sensor | Quantity | Links    | Unit Price |
 |--------------|-----------------|----------|----------|----------|
 | MCU-01       | ESP32           |        1 | https://www.mercadolibre.com.co/esp32-s3-devkitc-1-n16r8-240mhz-wifi-24ghz-bt-ble-5-mesh-ia/up/MCOU2415072850#polycard_client=search-desktop&search_layout=grid&position=2&type=product&tracking_id=ca0d567b-a2a6-4c04-b2f1-8e8458239032&wid=MCO1433642679&sid=search / https://www.electrosena.com/esp32-s3-devkitc-1-n16r8-240mhz-wifi-24ghz-bt?srsltid=AfmBOormrBJqhC2HQq-a3JGKDZVB748bG1iJ7COzusd_YJK0-UseGWigE98          | 39000         |
-| BULK- 01     | BF350-3AA       |        3 | https://www.didacticaselectronicas.com/shop/sensor-flex-modulo-sensor-de-flexion-13560#attr=         | 16420         |
-| AIRFRAME- 01 | BF350-3AA       |        4 | https://www.didacticaselectronicas.com/shop/sensor-flex-modulo-sensor-de-flexion-13560#attr=         | 16420         |
+| BULK- 01     | BF350-3AA       |        6 | https://www.mactronica.com.co/sensor-de-tension-bf350-3aa?srsltid=AfmBOorA8cLSQZhgDrDQA8S8Az3rluu4sGsZQTOVuOFAlIBRhsTqmXvm / https://www.vistronica.com/sensores/presion/sensor-de-tension-bf350-3aa-flexible-detail.html        | 4000         |
+| AIRFRAME- 01 | BF350-3AA       |        8 | https://www.mactronica.com.co/sensor-de-tension-bf350-3aa?srsltid=AfmBOorA8cLSQZhgDrDQA8S8Az3rluu4sGsZQTOVuOFAlIBRhsTqmXvm / https://www.vistronica.com/sensores/presion/sensor-de-tension-bf350-3aa-flexible-detail.html        | 4000         |
+| BULK-01 and AIRFRAME-01 ADC | HX711       |        7 | https://www.sigmaelectronica.net/producto/tarjeta-hx711/  /  https://electronilab.co/tienda/modulo-conversor-analogico-digital-de-24-bits-hx711/?srsltid=AfmBOoq4W7QpH0hdLPC0wUbKOrHsOgU6YlLQ7xtJiKEBvLOsi2T_WXLn       | 4000         |
 | AIRFRAME- 02 | MPU6050         |        2 | https://electronilab.co/tienda/mpu6050-acelerometro-y-giroscopio-i2c/?srsltid=AfmBOoos5b-5oDYYjYWI4dc5Ce9IS2TpBlNzysd81v2O5NejvKPIZ8Fz / https://www.didacticaselectronicas.com/shop/gy-521-acelerometro-y-giroscopio-mpu-6050-3597?search=MPU6050&order=name+asc#attr=         | 13600       |
 | TEMP- 01     | ADT7410         |        4 | https://www.adafruit.com/product/4089?srsltid=AfmBOopTx8_F_sMqNDBvVKPHLc6pLuGQoYOHm5YqugRUhae2p8LorZwf   | 21956          |
 | MIC- 01      | MAX4466         |        1 | https://www.sigmaelectronica.net/producto/tarjeta-max4466/ / https://electronilab.co/tienda/modulo-microfono-electrect-con-preamplificador-max4466/?srsltid=AfmBOoqFRgg8PleYfhtgM5yKGgORRrDoCc9rKxrbrrb5RvXjFiq5PoA9         | 15900      |
@@ -164,13 +167,20 @@ Additionally, a 16GB Micro SD card will be used to store a file containing all t
 | GPIO12 | SPI SCK  |
 | GPIO13 | SPI MISO |
 | GPIO14 | MIC-01 |
-| GPIO15 | BULK-01 Sensor 1 |
-| GPIO16 | BULK-01 Sensor 2 |
-| GPIO17 | BULK-01 Sensor 3 |
-| GPIO35 | AIRFRAME-01 Sensor 1 |
-| GPIO36 | AIRFRAME-01 Sensor 2 |
-| GPIO37 | AIRFRAME-01 Sensor 3 |
-| GPIO38 | AIRFRAME-01 Sensor 4 |
+| GPIO15 | BULK-01 Sensor 1 DT |
+| GPIO18 | BULK-01 Sensor 1 SCK |
+| GPIO16 | BULK-01 Sensor 2 DT |
+| GPIO19 | BULK-01 Sensor 2 SCK |
+| GPIO17 | BULK-01 Sensor 3 DT|
+| GPIO20 | BULK-01 Sensor 3 SCK|
+| GPIO35 | AIRFRAME-01 Sensor 1 DT|
+| GPIO21 | AIRFRAME-01 Sensor 1 SCK|
+| GPIO36 | AIRFRAME-01 Sensor 2 DT|
+| GPIO47 | AIRFRAME-01 Sensor 2 SCK|
+| GPIO37 | AIRFRAME-01 Sensor 3 DT|
+| GPIO48 | AIRFRAME-01 Sensor 3 SCK|
+| GPIO1  | AIRFRAME-01 Sensor 4 DT|
+| GPIO2  | AIRFRAME-01 Sensor 4 SCK|
 
 
 Note: - The AIRFRAME-02 sensor as there are two connected to the I2C bus, the AD0 pin of one of them should be connected to VCC, and the other one to GND, this is for having different I2C ID in the bus.
@@ -184,3 +194,13 @@ Note: - The AIRFRAME-02 sensor as there are two connected to the I2C bus, the AD
 |TEMP-01 Sensor 4|VCC|VCC|
 
 this is for having different I2C ID in the bus.
+
+| Sensor    | A0 | A1 |
+|-----------|----|----|
+|TEMP-01 Sensor 1|GND|GND|
+|TEMP-01 Sensor 2|VCC|GND|
+|TEMP-01 Sensor 3|GND|VCC|
+|TEMP-01 Sensor 4|VCC|VCC|
+
+this is for having different I2C ID in the bus.
+
