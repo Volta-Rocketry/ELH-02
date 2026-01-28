@@ -5,24 +5,25 @@ This document defines the final power architecture for the TBD project. The info
 
 ## 2. Final Power Budget
 
-| Sensor ID | Component | Supply Voltage (VDD)| Rated Current Consumption | Sleep Mode/Low Power Consumption | Possible Current Spikes |
+| Sensor ID | Component | Supply Voltage (VDD)| Rated Current Consumption | Possible Current Spikes | Quantity |
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| MCU-01 | ESP32-S3-DevKitC-1 | 5V | 500mA | 7µA | 340mA |
-| BULK-01 | BF350-3AA | 3,3V | 14,3mA | - | - |
-| AIRFRAME-01 | BF350-3AA | 3,3V | 14,3mA | - | - |
-| AIRFRAME-02 | MPU6050 | 3,3V | 3.9mA | 5µA | - |
-| TEMP-01 | ADT7410 | 3,3V | 0,21mA | 2µA | - |
-| MIC-01 | MAX4466 | 3,3V | 0,06mA | 0,05µA | - |
-| ALT-01 | MS5611 | 3,3V | 0,0125mA | 0,14µA | - |
-| IMU-01 | ICM-20649 | 3,3V | 3.21mA | 8µA | - |
-| FLASH-01 | W25Q128 | 3,3V | 25mA | 20µA | 25mA |
-| SD-01 | MicroSD Adapter | 5V | 80mA | 2000µA | 200 mA |
-|  | | **Total** | 640,9925mA | 2042,19µA | 565mA |
+| MCU-01 | ESP32-S3-DevKitC-1 | 5V | 500mA | 340mA | 1 |
+| BULK-01 | BF350-3AA | 5V | 14,2mA | - | 1 |
+| AIRFRAME-01 | BF350-3AA | 5V | 14,2mA | - | 1 |
+| BULK-01/AIRFRAME-01 ADC | HX711 | 5V | 1,4mA | - | 7 |
+| AIRFRAME-02 | MPU6050 | 3,3V | 3,9mA | - | 1 |
+| TEMP-01 | ADT7410 | 3,3V | 0,21mA | - | 1 |
+| MIC-01 | MAX4466 | 3,3V | 0,06mA | - | 1 |
+| ALT-01 | MS5611 | 3,3V | 0,0125mA | - | 1 |
+| IMU-01 | ICM-20649 | 3,3V | 3,21mA | - | 1 |
+| FLASH-01 | W25Q128 | 3,3V | 25mA | 25mA | 1 |
+| SD-01 | MicroSD Adapter | 5V | 80mA | 200 mA | 1 |
+|  | | **Total** | 632,5925mA | 565mA |
 
-- **Total:** Rated Current Consumption + Possible Current Spikes
+- **Total:** Rated Current Consumption
 
 $$
-TotalCurrentConsumption = 641mA + 565mA = 1206mA
+TotalCurrentConsumption ≈ 632,6mA
 $$
 
 ## 3. Battery Final Selection
@@ -34,11 +35,11 @@ FinalCapacity = I_T (mA) \cdot \ T (Hours)
 $$
 
 $$
-FinalCapacity = 1206mA \cdot \ 4h
+FinalCapacity = 632,6mA \cdot \ 4h
 $$
 
 $$
-FinalCapacity = 4824mAh
+FinalCapacity = 2530,4mAh
 $$
 
 - **Voltage (V)**
@@ -49,22 +50,24 @@ $$
 
 | **Configuration** | **Voltage** | **Final Capacity** | **Notes**|
 | :---: | :---: | :---: | :---: |
-| 2S Lithium Polymer Battery | 7,4V | 5000mA | Capacity based on a minimum autonomy of 4 hours in the worst-case scenario, with a margin of error of 3,6%. |
+| 2S lithium-ion Battery | 7,4V | 3000mA | Capacity based on a minimum autonomy of 4 hours. Reference 18650, packaged in a cylindrical metallic casing |
 
 
 ## 4. Final Power Topology
 
 ### Waterfall Bus Architecture
+
 <center>
 
 | **Stage** | **Function** | **Bus Components** |
 | :---: | :---: | :---: |
-| First Stage | 7,4V → 5V | ESP32-S3-DevKitC-1, MicroSD Adapter |
-| Second Stage | 5V → 3,3V | BF350-3AA, MPU6050, ADT7410, MAX4466, MS5611, ICM-20649, W25Q128 |
+| First Stage | 7,4V → 5V | ESP32-S3-DevKitC-1, MicroSD Adapter, HX711 → BF350-3AA |
+| Second Stage | 5V → 3,3V | MPU6050, ADT7410, MAX4466, MS5611, ICM-20649, W25Q128 |
+
 </center>
 
 ### Two-Stage Power Topology (Buck + LDO)
-- The **first stage** implements a **buck regulator** to reduce the nominal **7.4V input to 5V** in a simple and efficient way. The ESP32 and the microSD adapter module will be connected to this bus.
+- The **first stage** implements a **buck regulator** to reduce the nominal **7.4V input to 5V** in a simple and efficient way. The ESP32, the microSD adapter module and the HX711 module will be connected to this bus.
 - The **second stage** consists of creating a linear bus for the other components. An **LDO regulator** that reduces **5V to 3.3V** is chosen instead of connecting them all to the microcontroller's 3.3V pin because they exceed the thermal capacity of the integrated regulator and compromise the integrity of the analog signal.
 
 <center>
@@ -77,6 +80,7 @@ $$
 
 ## 5. Final Regulator Shortlist
 ### BUCK Selection
+
 <center>
 
 || **Regulator** | **Continuous Load Current** | **Efficiency** | **Switching Frequency**| **Final Score** |
@@ -84,11 +88,13 @@ $$
 | **%** | - | **20** | **30** | **50** | - |
 |  | **MP1584** | **3A** | **92%** | **100kHz - 1.5MHz** | **779,4** |
 |  | MP2307 | 3A | 96% | 340kHz | 199,4 |
+
 </center>
 
 Final BUCK Regulator: **MP1584**
 
 ### LDO Selection
+
 <center>
 
 || **Regulator** | **Vin(max)** | **Vout(max)** | **Noise (µVrms)**| **PSRR (dB)** | **Final Score** |
@@ -97,11 +103,13 @@ Final BUCK Regulator: **MP1584**
 | | TPS7A21 | 6V | 5,5V | 7,7 | 61 | 25,66 |
 | | TPS7A20 | 6V | 5,5V | 7 | 60 | 25,1 |
 | | **LP5907** | **5,5V** | **4,5V** | **6,5** | **60** | **24,675** |
+
 </center>
 
 Final LDO Regulator: **LP5907**
 
 ### REGULATOR LIST
+
 <center>
 
 | **Regulator Name** | **Category** | 
@@ -128,6 +136,8 @@ This section describes how noise will be cleaned up and the signal from the comp
 | ESP32-S3 | ADC | 100nF | 10V | X7R Ceramic | 1 | Cleans thermal noise before analog conversion |
 | Micro SD | VCC | 22µF | 10V | Electrolytic | 1 | High capacity to absorb potential SD current spikes |
 | W25Q128 | VCC | 100nF | 10V | X7R Ceramic | 1 | Keeps the chip voltage stable and prevents noise from spreading to the sensors |
+| HX711 | VCC | 22µF | 16V | Electrolytic | 7 | Isolates digital noise from gauges |
+
 
 ## 7. Final Power Tree
 ```mermaid
@@ -144,6 +154,7 @@ flowchart LR
     IMU[ICM-20649]
     FLASH[W25Q128]
     SD[MicroSD Adapter]
+    HX[HX711]
     C1[10µF Ceramic]
     C2[22µF Tantalum]
     C3[1µF Ceramic]
@@ -151,6 +162,7 @@ flowchart LR
     C5[100nF Ceramic]
     C6[22µF Electrolytic]
     C7[100nF Ceramic]
+    C8[22µF Electrolytic]
 
     LiPo --> C1 
     C1 --> BUCK
@@ -158,12 +170,14 @@ flowchart LR
     C2 --> MCU
     C2 --> SD
     C2  --> C3
+    C2 --> C8
+    C8 --> HX
+    HX --> AIRFRAME1
+    HX --> BULK
     MCU --> C5
     SD --> C6
     C3 --> LDO
     LDO --> C4
-    C4 --> BULK
-    C4 --> AIRFRAME1
     C4 --> AIRFRAME2
     C4 --> MIC
     C4 --> ALT
