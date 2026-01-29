@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "ELH_02_Library")(type "KiCad")(uri "D:/repos/Volta/ELH-02/kicad/Library/ELH_02_Library.kicad_sym")(options "")(descr ""))
+)

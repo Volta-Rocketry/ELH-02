@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "Elh_02_library_footprint")(type "KiCad")(uri "D:/repos/Volta/ELH-02/kicad/Library/Elh_02_library_footprint.pretty")(options "")(descr ""))
+)
