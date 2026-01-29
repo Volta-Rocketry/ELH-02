@@ -5,25 +5,25 @@ This document defines the final power architecture for the TBD project. The info
 
 ## 2. Final Power Budget
 
-| Sensor ID | Component | Supply Voltage (VDD)| Rated Current Consumption | Possible Current Spikes | Quantity |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| MCU-01 | ESP32-S3-DevKitC-1 | 5V | 500mA | 340mA | 1 |
-| BULK-01 | BF350-3AA | 5V | 14,2mA | - | 6 |
-| AIRFRAME-01 | BF350-3AA | 5V | 14,2mA | - | 8 |
-| BULK-01/AIRFRAME-01 ADC | HX711 | 5V | 1,4mA | - | 7 |
-| AIRFRAME-02 | MPU6050 | 3,3V | 3,9mA | - | 2 |
-| TEMP-01 | ADT7410 | 3,3V | 0,21mA | - | 4 |
-| MIC-01 | MAX4466 | 3,3V | 0,06mA | - | 1 |
-| ALT-01 | MS5611 | 3,3V | 0,0125mA | - | 1 |
-| IMU-01 | ICM-20649 | 3,3V | 3,21mA | - | 1 |
-| FLASH-01 | W25Q128 | 3,3V | 25mA | 25mA | 1 |
-| SD-01 | MicroSD Adapter | 5V | 80mA | 200 mA | 1 |
-|  | | **Total** | 632,5925mA | 565mA |
+| Sensor ID | Component | Supply Voltage (VDD)| Rated Current Consumption | Quantity |
+| :---: | :---: | :---: | :---: | :---: | 
+| MCU-01 | ESP32-S3-DevKitC-1 | 5V | 500mA | 1 |
+| BULK-01 | BF350-3AA | 5V | 14,2mA | 6 |
+| AIRFRAME-01 | BF350-3AA | 5V | 14,2mA | 8 |
+| BULK-01/AIRFRAME-01 ADC | HX711 | 5V | 1,4mA  | 7 |
+| AIRFRAME-02 | MPU6050 | 3,3V | 3,9mA | 2 |
+| TEMP-01 | ADT7410 | 3,3V | 0,21mA | 4 |
+| MIC-01 | MAX4466 | 3,3V | 0,06mA  | 1 |
+| ALT-01 | MS5611 | 3,3V | 0,0125mA  | 1 |
+| IMU-01 | ICM-20649 | 3,3V | 3,21mA  | 1 |
+| FLASH-01 | W25Q128 | 3,3V | 25mA | 1 |
+| SD-01 | MicroSD Adapter | 5V | 80mA | 1 |
+|  | | **Total** | 825,5225mA | 33 |
 
 - **Total:** Rated Current Consumption
 
 $$
-TotalCurrentConsumption ≈ 632,6mA
+TotalCurrentConsumption ≈ 825,5225mAmA
 $$
 
 ## 3. Battery Final Selection
@@ -35,11 +35,11 @@ FinalCapacity = I_T (mA) \cdot \ T (Hours)
 $$
 
 $$
-FinalCapacity = 632,6mA \cdot \ 4h
+FinalCapacity = 825,5225mA \cdot \ 4h
 $$
 
 $$
-FinalCapacity = 2530,4mAh
+FinalCapacity = 3302,09mAh
 $$
 
 - **Voltage (V)**
@@ -50,7 +50,7 @@ $$
 
 | **Configuration** | **Voltage** | **Final Capacity** | **Notes**|
 | :---: | :---: | :---: | :---: |
-| 2S lithium-ion Battery | 7,4V | 3000mA | Capacity based on a minimum autonomy of 4 hours. Reference 18650, packaged in a cylindrical metallic casing |
+| 2S lithium-ion Battery | 7,4V | 3500mA | Capacity based on a minimum autonomy of 4 hours. Reference 18650, packaged in a cylindrical metallic casing |
 
 
 ## 4. Final Power Topology
