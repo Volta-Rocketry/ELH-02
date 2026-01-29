@@ -8,11 +8,11 @@ This document defines the final power architecture for the TBD project. The info
 | Sensor ID | Component | Supply Voltage (VDD)| Rated Current Consumption | Possible Current Spikes | Quantity |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | MCU-01 | ESP32-S3-DevKitC-1 | 5V | 500mA | 340mA | 1 |
-| BULK-01 | BF350-3AA | 5V | 14,2mA | - | 1 |
-| AIRFRAME-01 | BF350-3AA | 5V | 14,2mA | - | 1 |
+| BULK-01 | BF350-3AA | 5V | 14,2mA | - | 6 |
+| AIRFRAME-01 | BF350-3AA | 5V | 14,2mA | - | 8 |
 | BULK-01/AIRFRAME-01 ADC | HX711 | 5V | 1,4mA | - | 7 |
-| AIRFRAME-02 | MPU6050 | 3,3V | 3,9mA | - | 1 |
-| TEMP-01 | ADT7410 | 3,3V | 0,21mA | - | 1 |
+| AIRFRAME-02 | MPU6050 | 3,3V | 3,9mA | - | 2 |
+| TEMP-01 | ADT7410 | 3,3V | 0,21mA | - | 4 |
 | MIC-01 | MAX4466 | 3,3V | 0,06mA | - | 1 |
 | ALT-01 | MS5611 | 3,3V | 0,0125mA | - | 1 |
 | IMU-01 | ICM-20649 | 3,3V | 3,21mA | - | 1 |
