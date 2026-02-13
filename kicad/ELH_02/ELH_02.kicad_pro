@@ -359,14 +359,26 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Descripción",
+          "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "Default Editing",
+      "name": "",
       "sort_asc": true,
-      "sort_field": "Referencia"
+      "sort_field": "Reference"
     },
     "connection_grid_size": 50.0,
     "drawing": {
@@ -412,14 +424,6 @@
     [
       "ddf33e24-3f52-4d01-bd1f-be84b2a64503",
       "Root"
-    ],
-    [
-      "b2eccbe2-dee1-4c54-a0c2-b0f7184051b9",
-      "processing_and_data"
-    ],
-    [
-      "7b2f78bc-89d5-4403-9704-92679e484d21",
-      "sensing"
     ],
     [
       "1f501825-351b-4980-b7f3-c93f0e70e6aa",
